@@ -15,6 +15,10 @@ on:
   schedule:
     - cron: '0 12 * * 1' # segunda-feira 09h (BRT)
 
+# contents:write → permite ao bot commitar os relatórios de volta no repo
+permissions:
+  contents: write
+
 env:
   MONOLITH_URL: https://monolith-two-delta.vercel.app
   SHELL_URL: https://shell-gamma-six.vercel.app
