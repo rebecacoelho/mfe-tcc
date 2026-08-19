@@ -2,7 +2,7 @@
 # No dashboard: New → Blueprint → apontar para este repositório.
 services:
   - type: web
-    name: minishop-api
+    name: minishop-tcc-api
     runtime: node
     rootDir: backend
     plan: free
