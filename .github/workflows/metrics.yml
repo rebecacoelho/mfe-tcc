@@ -1,0 +1,99 @@
+name: Métricas — Monólito x MFE
+
+# Coleta automatizada de métricas do TCC:
+#   job "local"  → suíte completa (tempo de build, bundle, incremental, Lighthouse local)
+#   job "remoto" → smoke test E2E + Lighthouse contra as URLs de produção
+#
+# Dispara em: push na main, agendamento semanal e execução manual
+# (Actions → "Métricas — Monólito x MFE" → Run workflow).
+# Os relatórios ficam como artifacts e também são commitados de volta no repo.
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+  schedule:
+    - cron: '0 12 * * 1' # segunda-feira 09h (BRT)
+
+env:
+  MONOLITH_URL: https://monolith-two-delta.vercel.app
+  SHELL_URL: https://shell-gamma-six.vercel.app
+  API_HEALTH: https://minishop-tcc-api.onrender.com/api/health
+
+jobs:
+  metricas-locais:
+    name: Suíte local (builds, bundles, Lighthouse)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Instalar dependências
+        run: npm install
+
+      # measure.js: 9 grupos de métricas — build sequencial/paralelo/incremental,
+      # tamanho de bundle, cold start, Lighthouse, bytes por rota, resiliência, acoplamento.
+      # Sobe backend e previews locais dentro do próprio runner.
+      - name: Rodar suíte de métricas
+        run: npm run metrics
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: metricas-locais
+          path: |
+            metrics/report.md
+            metrics/results.json
+          retention-days: 90
+
+  metricas-remotas:
+    name: Produção (smoke test + Lighthouse)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Instalar dependências
+        run: npm install
+
+      # Render free hiberna após 15min: aquece a API antes de medir
+      - name: Aquecer backend (cold start)
+        run: |
+          for i in $(seq 1 18); do
+            code=$(curl -s -o /dev/null -w "%{http_code}" --max-time 60 "$API_HEALTH" || true)
+            echo "tentativa $i: HTTP $code"
+            [ "$code" = "200" ] && exit 0
+            sleep 10
+          done
+          echo "backend não respondeu" && exit 1
+
+      - name: Smoke test E2E em produção
+        run: node metrics/smoke-test.js
+
+      - name: Lighthouse em produção (mediana de 3 runs)
+        run: RUNS=3 node metrics/measure-remote.js
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: metricas-remotas
+          path: |
+            metrics/report-remote.md
+            metrics/results-remote.json
+          retention-days: 90
+
+      # Histórico de relatórios versionado no próprio repo.
+      # [skip ci] evita loop: este commit não dispara os workflows de novo.
+      - name: Commit relatórios no repo
+        if: github.event_name != 'push'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git pull --rebase
+          git add metrics/report.md metrics/report-remote.md
+          git commit -m "metricas: relatorio automatizado [skip ci]" || echo "nada para commitar"
+          git push

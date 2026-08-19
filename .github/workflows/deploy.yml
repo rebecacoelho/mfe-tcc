@@ -1,0 +1,63 @@
+name: CD — Deploy Vercel
+
+# Deploy contínuo dos 4 frontends na Vercel a cada push na main.
+# O backend faz auto-deploy no Render (integração GitHub nativa do serviço).
+#
+# Pré-requisito: secret VERCEL_TOKEN no repositório
+# (https://vercel.com/account/tokens → `gh secret set VERCEL_TOKEN`)
+
+on:
+  push:
+    branches: [main]
+
+env:
+  VERCEL_ORG_ID: team_ASe3eXzWFnF0raVllAwuJAGy
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - dir: monolith
+            project-id: prj_jHGhWM5DvI7c5UwOmhpkdBJSXHDd
+            envs: |
+              VITE_API_URL=https://minishop-tcc-api.onrender.com/api
+          - dir: microfrontends/products-mfe
+            project-id: prj_y23DKNzF03o21SPeAwi9w0xsNfic
+            envs: |
+              VITE_API_URL=https://minishop-tcc-api.onrender.com/api
+          - dir: microfrontends/cart-mfe
+            project-id: prj_ilut82Ld7125YnjFIK3SV268JeS9
+            envs: |
+              VITE_API_URL=https://minishop-tcc-api.onrender.com/api
+          # shell por último: embute as URLs dos remotes no build
+          - dir: microfrontends/shell
+            project-id: prj_P6VtDCQaJCzFwNpXLBaxG1odMDJY
+            envs: |
+              VITE_PRODUCTS_MFE_URL=https://products-mfe.vercel.app
+              VITE_CART_MFE_URL=https://cart-mfe.vercel.app
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      # URLs de produção escritas em .env.production — o Vite/loadEnv
+      # consome no build (mesmo mecanismo das builds manuais)
+      - name: Configurar env de produção
+        working-directory: ${{ matrix.dir }}
+        run: echo "${{ matrix.envs }}" > .env.production
+
+      - name: Deploy ${{ matrix.dir }}
+        working-directory: ${{ matrix.dir }}
+        env:
+          VERCEL_PROJECT_ID: ${{ matrix.project-id }}
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+        run: |
+          npx vercel@latest pull --yes --environment=production --token="$VERCEL_TOKEN"
+          npx vercel@latest build --prod --token="$VERCEL_TOKEN"
+          npx vercel@latest deploy --prebuilt --prod --token="$VERCEL_TOKEN"

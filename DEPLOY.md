@@ -144,6 +144,29 @@ e do CDN da Vercel (os dois ambientes contam partes diferentes da história).
 3. Recarregue o shell: mudança no ar, sem redeploy do shell nem do cart-mfe.
 4. No monólito, a mesma alteração exigiria rebuild e redeploy da aplicação inteira.
 
+## CI/CD (GitHub Actions)
+
+Dois workflows em `.github/workflows/`:
+
+| Workflow | Dispara em | O que faz |
+|---|---|---|
+| `deploy.yml` | push na `main` | Deploy dos 4 frontends na Vercel (matrix em paralelo). O backend faz auto-deploy pelo Render. |
+| `metrics.yml` | push na `main`, manual, semanal (cron) | Job local: suíte completa de métricas no runner. Job remoto: aquece a API, roda smoke test + Lighthouse em produção. Relatórios viram artifacts e são commitados no repo (`[skip ci]` evita loop). |
+
+**Configuração única necessária** — criar o token da Vercel e registrá-lo como secret:
+
+```bash
+# 1. crie um token em https://vercel.com/account/tokens
+# 2. registre no repo (cole o token quando pedir):
+gh secret set VERCEL_TOKEN
+```
+
+Sem o secret, o workflow de deploy falha (o de métricas funciona sem ele).
+Execução manual de métricas: **Actions → "Métricas — Monólito x MFE" → Run workflow**.
+
+> Nota: o GitHub desativa workflows agendados após 60 dias de inatividade do repo;
+> basta reativar na aba Actions ou rodar manualmente.
+
 ## Troubleshooting
 
 | Sintoma | Causa provável |

@@ -50,6 +50,7 @@ duas vezes sobre o mesmo backend. Node 20+, npm workspaces.
   (`VITE_API_URL`, `VITE_PRODUCTS_MFE_URL`, `VITE_CART_MFE_URL`) com fallback
   para localhost — em produção, defini-las no provedor e rebuildar (ver DEPLOY.md).
 - O backend guarda dados em memória; restart reseta pedidos (produtos são estáticos).
-- Deploy: backend no Render (`render.yaml`), frontends na Vercel (`vercel.json`
-  com rewrite de SPA em cada app). Smoke test e Lighthouse aceitam
-  `MONOLITH_URL`/`SHELL_URL` para rodar contra produção (`metrics/measure-remote.js`).
+- Deploy: backend no Render (`render.yaml`, auto-deploy via GitHub), frontends na
+  Vercel (`.github/workflows/deploy.yml` com secret `VERCEL_TOKEN`). Métricas rodam
+  no GitHub Actions (`.github/workflows/metrics.yml`, push/manual/semanal).
+  Smoke test e Lighthouse aceitam `MONOLITH_URL`/`SHELL_URL` (`metrics/measure-remote.js`).

@@ -1,5 +1,8 @@
 # MiniShop — Monólito x Microfrontends (TCC)
 
+[![Métricas](https://github.com/rebecacoelho/mfe-tcc/actions/workflows/metrics.yml/badge.svg)](https://github.com/rebecacoelho/mfe-tcc/actions/workflows/metrics.yml)
+[![Deploy](https://github.com/rebecacoelho/mfe-tcc/actions/workflows/deploy.yml/badge.svg)](https://github.com/rebecacoelho/mfe-tcc/actions/workflows/deploy.yml)
+
 E-commerce mínimo implementado **duas vezes** — como monólito e como microfrontends —
 sobre o **mesmo backend**, para comparação de métricas no TCC.
 
