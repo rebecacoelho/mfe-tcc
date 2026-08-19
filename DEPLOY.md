@@ -1,5 +1,21 @@
 # Deploy em ambiente real (gratuito)
 
+## URLs de produção deste projeto ✅
+
+| Serviço | URL |
+|---|---|
+| **Monólito** | https://monolith-two-delta.vercel.app |
+| **Shell (MFE)** | https://shell-gamma-six.vercel.app |
+| products-mfe | https://products-mfe.vercel.app |
+| cart-mfe | https://cart-mfe.vercel.app |
+| Backend API | https://minishop-tcc-api.onrender.com |
+| Repositório | https://github.com/rebecacoelho/mfe-tcc |
+
+> Observação: o nome `minishop-api` já estava ocupado no Render por outro
+> serviço — por isso o backend usa `minishop-tcc-api`. Nas primeiras ~10 min
+> após a criação do serviço, requisições podem falhar intermitentemente
+> (propagação); depois estabiliza.
+
 Arquitetura de deploy — 6 serviços gratuitos:
 
 ```

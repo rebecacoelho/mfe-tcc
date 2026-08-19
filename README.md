@@ -3,6 +3,11 @@
 E-commerce mínimo implementado **duas vezes** — como monólito e como microfrontends —
 sobre o **mesmo backend**, para comparação de métricas no TCC.
 
+**Em produção:** [monólito](https://monolith-two-delta.vercel.app) ·
+[shell MFE](https://shell-gamma-six.vercel.app) ·
+[API](https://minishop-tcc-api.onrender.com/api/products)
+(detalhes em [DEPLOY.md](./DEPLOY.md))
+
 ## Estrutura
 
 ```

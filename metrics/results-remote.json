@@ -1,0 +1,36 @@
+{
+  "date": "2026-08-19T19:03:29.933Z",
+  "runs": 3,
+  "targets": [
+    {
+      "name": "Monólito",
+      "url": "https://monolith-two-delta.vercel.app"
+    },
+    {
+      "name": "Microfrontends",
+      "url": "https://shell-gamma-six.vercel.app"
+    }
+  ],
+  "median": {
+    "Monólito": {
+      "performanceScore": 74,
+      "first-contentful-paint": 1195.54,
+      "largest-contentful-paint": 3041.05,
+      "total-blocking-time": 0,
+      "cumulative-layout-shift": 0,
+      "speed-index": 2400.07,
+      "interactive": 3041.05,
+      "total-byte-weight": 458253
+    },
+    "Microfrontends": {
+      "performanceScore": 80,
+      "first-contentful-paint": 1395.98,
+      "largest-contentful-paint": 1624.27,
+      "total-blocking-time": 0,
+      "cumulative-layout-shift": 0,
+      "speed-index": 6207.64,
+      "interactive": 1624.27,
+      "total-byte-weight": 114943
+    }
+  }
+}
