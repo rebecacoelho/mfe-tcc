@@ -22,7 +22,11 @@ function check(name, ok, extra = '') {
   console.log(`${ok ? '✅' : '❌'} ${name}${extra ? ` — ${extra}` : ''}`);
 }
 
-const browser = await puppeteer.launch({ headless: true });
+// --no-sandbox: necessário em runners de CI (GitHub Actions)
+const browser = await puppeteer.launch({
+  headless: true,
+  args: ['--no-sandbox', '--disable-setuid-sandbox'],
+});
 const page = await browser.newPage();
 page.on('pageerror', (e) => console.log('   [pageerror]', e.message));
 

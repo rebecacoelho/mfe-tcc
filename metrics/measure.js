@@ -318,7 +318,11 @@ let routeBytes = null;
 let resilience = null;
 try {
   const { default: puppeteer } = await import('puppeteer');
-  const browser = await puppeteer.launch({ headless: true });
+  // --no-sandbox: necessário em runners de CI (GitHub Actions)
+  const browser = await puppeteer.launch({
+    headless: true,
+    args: ['--no-sandbox', '--disable-setuid-sandbox'],
+  });
 
   async function measureRoutes(baseUrl, origins) {
     const page = await browser.newPage();
