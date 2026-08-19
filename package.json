@@ -1,0 +1,24 @@
+{
+  "name": "mfe-tcc",
+  "version": "1.0.0",
+  "private": true,
+  "description": "E-commerce comparativo: Monólito x Microfrontends (TCC)",
+  "workspaces": [
+    "backend",
+    "monolith",
+    "microfrontends/*",
+    "metrics"
+  ],
+  "scripts": {
+    "start:backend": "npm run dev -w backend",
+    "dev:monolith": "npm run dev -w monolith",
+    "dev:shell": "npm run dev -w shell",
+    "build:all": "npm run build -w monolith && npm run build -w products-mfe && npm run build -w cart-mfe && npm run build -w shell",
+    "preview:monolith": "npm run preview -w monolith",
+    "preview:mfe": "concurrently -n products,cart,shell \"npm run preview -w products-mfe\" \"npm run preview -w cart-mfe\" \"npm run preview -w shell\"",
+    "metrics": "npm run measure -w metrics"
+  },
+  "devDependencies": {
+    "concurrently": "^9.0.1"
+  }
+}

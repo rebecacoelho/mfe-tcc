@@ -1,0 +1,11 @@
+# Blueprint do Render para o backend (https://render.com/docs/blueprint-spec)
+# No dashboard: New → Blueprint → apontar para este repositório.
+services:
+  - type: web
+    name: minishop-api
+    runtime: node
+    rootDir: backend
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /api/health

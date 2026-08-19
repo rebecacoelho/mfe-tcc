@@ -1,0 +1,14 @@
+{
+  "name": "metrics",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "measure": "node measure.js"
+  },
+  "dependencies": {
+    "chrome-launcher": "^1.1.2",
+    "lighthouse": "^12.2.0",
+    "puppeteer": "^24.43.1"
+  }
+}
