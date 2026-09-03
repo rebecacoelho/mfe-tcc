@@ -50,7 +50,7 @@ mfe-tcc/
                  └─────────────────────────────────────────┘
 ```
 
-Decisões de arquitetura (boas para citar no TCC):
+Decisões de arquitetura:
 
 - **Module Federation** via `@originjs/vite-plugin-federation`: o shell consome os
   remotes em runtime pelos `remoteEntry.js`; cada MFE tem build e deploy independentes.
