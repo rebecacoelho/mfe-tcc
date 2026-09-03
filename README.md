@@ -105,7 +105,7 @@ O script mede automaticamente 9 grupos de métricas:
 | 8 | Resiliência | cart-mfe bloqueado → quanto da página continua funcional |
 | 9 | Acoplamento | imports estáticos cruzando fronteiras de módulos |
 
-### Resultados obtidos nesta máquina (1 execução — para o TCC, rode N vezes e use média/mediana)
+### Resultados obtidos nesta máquina (1 execução)
 
 **Onde o monólito ganha (custo dos MFEs):**
 
