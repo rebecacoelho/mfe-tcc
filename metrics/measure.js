@@ -388,14 +388,14 @@ try {
   await page.click('.card .btn-primary').catch(() => {});
   await new Promise((r) => setTimeout(r, 400));
   const badgeOk = (await page.$eval('.cart-badge', (el) => el.textContent).catch(() => null)) === '1';
-  const headerOk = await page.$eval('.logo', (el) => el.textContent.includes('MiniShop')).catch(() => false);
+  const headerOk = await page.$eval('.logo', (el) => el.textContent.includes('Shoply')).catch(() => false);
   // navega para /cart: deve mostrar o boundary de erro, sem derrubar a página
   await page.click('a[href="/cart"]').catch(() => {});
   await new Promise((r) => setTimeout(r, 2500));
   const degradedOk = await page
     .$eval('body', (el) => el.textContent.includes('Microfrontend indisponível'))
     .catch(() => false);
-  const stillAlive = await page.$eval('.logo', (el) => el.textContent.includes('MiniShop')).catch(() => false);
+  const stillAlive = await page.$eval('.logo', (el) => el.textContent.includes('Shoply')).catch(() => false);
   resilience = {
     productsOk,
     badgeOk,

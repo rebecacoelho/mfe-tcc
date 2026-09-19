@@ -1,4 +1,4 @@
-# MiniShop — Monólito x Microfrontends (TCC)
+# Shoply — Monólito x Microfrontends (TCC)
 
 [![Métricas](https://github.com/rebecacoelho/mfe-tcc/actions/workflows/metrics.yml/badge.svg)](https://github.com/rebecacoelho/mfe-tcc/actions/workflows/metrics.yml)
 [![Deploy](https://github.com/rebecacoelho/mfe-tcc/actions/workflows/deploy.yml/badge.svg)](https://github.com/rebecacoelho/mfe-tcc/actions/workflows/deploy.yml)

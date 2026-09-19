@@ -8,7 +8,7 @@ export default function Header() {
     <header className="header">
       <div className="container header-inner">
         <Link to="/" className="logo">
-          🛒 MiniShop <span className="badge-arch">monólito</span>
+          🛒 Shoply <span className="badge-arch">monólito</span>
         </Link>
         <nav className="nav">
           <NavLink to="/" end>

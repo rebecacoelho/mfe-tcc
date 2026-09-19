@@ -2,7 +2,7 @@
 
 ## Projeto
 
-Comparativo Monólito x Microfrontends para TCC. E-commerce "MiniShop" implementado
+Comparativo Monólito x Microfrontends para TCC. E-commerce "Shoply" implementado
 duas vezes sobre o mesmo backend. Node 20+, npm workspaces.
 
 ## Estrutura e portas
