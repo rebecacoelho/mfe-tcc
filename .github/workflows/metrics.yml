@@ -22,6 +22,8 @@ permissions:
 env:
   MONOLITH_URL: https://monolith-two-delta.vercel.app
   SHELL_URL: https://shell-gamma-six.vercel.app
+  PRODUCTS_MFE_URL: https://products-mfe.vercel.app
+  CART_MFE_URL: https://cart-mfe.vercel.app
   API_HEALTH: https://minishop-tcc-api.onrender.com/api/health
 
 jobs:
@@ -75,6 +77,27 @@ jobs:
             sleep 10
           done
           echo "backend não respondeu" && exit 1
+
+      # Deploy Vercel e Métricas disparam em paralelo no push; o deploy leva ~60s
+      # para propagar globalmente. Sem espera o smoke test pode pegar o bundle antigo
+      # (remotes carregados sob demanda pelo shell).
+      - name: Aguardar deploy Vercel propagar
+        run: |
+          echo "Aguardando frontends responderem (pós-deploy)..."
+          for i in $(seq 1 30); do
+            codeM=$(curl -s -o /dev/null -w "%{http_code}" --max-time 15 "$MONOLITH_URL" || true)
+            codeS=$(curl -s -o /dev/null -w "%{http_code}" --max-time 15 "$SHELL_URL" || true)
+            codeP=$(curl -s -o /dev/null -w "%{http_code}" --max-time 15 "$PRODUCTS_MFE_URL" || true)
+            codeC=$(curl -s -o /dev/null -w "%{http_code}" --max-time 15 "$CART_MFE_URL" || true)
+            echo "tentativa $i: monolith=$codeM shell=$codeS products=$codeP cart=$codeC"
+            if [ "$codeM" = "200" ] && [ "$codeS" = "200" ] && [ "$codeP" = "200" ] && [ "$codeC" = "200" ]; then
+              # pequena margem para CDN da Vercel invalidar cache
+              sleep 10
+              exit 0
+            fi
+            sleep 10
+          done
+          echo "frontends não responderam a tempo" && exit 1
 
       - name: Smoke test E2E em produção
         run: node metrics/smoke-test.js

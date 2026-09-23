@@ -70,8 +70,12 @@ await page.waitForSelector('.state-msg.success', { timeout: 10000 }).catch(() =>
 const orderOk = await page.$eval('body', (el) => el.textContent.includes('Pedido confirmado'));
 check('Shell: checkout end-to-end funciona', orderOk);
 
-// detalhe do produto via remote
+// detalhe do produto via remote (aguarda hidratação do Module Federation)
 await page.goto(`${SHELL_URL}/product/3`, { waitUntil: 'networkidle0' });
+await page.waitForSelector('.product-detail', { timeout: 15000 }).catch(() => {});
+await page
+  .waitForFunction(() => document.body.textContent.includes('SoundMax'), { timeout: 15000 })
+  .catch(() => {});
 const detailOk = await page.$eval('body', (el) => el.textContent.includes('SoundMax')).catch(() => false);
 check('Shell: ProductDetail remoto renderiza', detailOk);
 
