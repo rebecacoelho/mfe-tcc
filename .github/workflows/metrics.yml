@@ -14,6 +14,10 @@ on:
   workflow_dispatch:
   schedule:
     - cron: '0 12 * * 1' # segunda-feira 09h (BRT)
+  workflow_run:
+    workflows: ['CD — Deploy Vercel']
+    types: [completed]
+    branches: [main]
 
 # contents:write → permite ao bot commitar os relatórios de volta no repo
 permissions:
@@ -28,6 +32,8 @@ env:
 
 jobs:
   metricas-locais:
+    # Não roda no workflow_run (evita duplicar após o deploy); nesse caso só o remoto importa
+    if: github.event_name != 'workflow_run'
     name: Suíte local (builds, bundles, Lighthouse)
     runs-on: ubuntu-latest
     steps:
@@ -55,6 +61,12 @@ jobs:
           retention-days: 90
 
   metricas-remotas:
+    # push agenda o remoto via workflow_run para garantir que o deploy já propagou;
+    # schedule/dispatch rodam direto
+    if: >-
+      (github.event_name == 'workflow_run' && github.event.workflow_run.conclusion == 'success') ||
+      github.event_name == 'schedule' ||
+      github.event_name == 'workflow_dispatch'
     name: Produção (smoke test + Lighthouse)
     runs-on: ubuntu-latest
     steps:
