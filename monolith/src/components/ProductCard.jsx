@@ -19,6 +19,10 @@ export default function ProductCard({ product }) {
           {product.name}
         </Link>
         <p className="card-price">{formatPrice(product.price)}</p>
+        <p className="card-installments">
+          em até 10x de {formatPrice(product.price / 10)} sem juros
+        </p>
+        {product.price >= 199 && <p className="card-freeship">Frete grátis</p>}
         <button className="btn btn-primary" onClick={() => addItem(product)}>
           Adicionar ao carrinho
         </button>

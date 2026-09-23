@@ -6,7 +6,7 @@ export const products = [
     price: 2499.9,
     category: 'Eletrônicos',
     stock: 15,
-    image: 'https://picsum.photos/seed/smartphone/600/400',
+    image: 'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=600&q=80',
   },
   {
     id: 2,
@@ -15,7 +15,7 @@ export const products = [
     price: 5899.0,
     category: 'Eletrônicos',
     stock: 8,
-    image: 'https://picsum.photos/seed/notebook/600/400',
+    image: 'https://images.unsplash.com/photo-1496181133206-80ce9b88a853?auto=format&fit=crop&w=600&q=80',
   },
   {
     id: 3,
@@ -24,7 +24,7 @@ export const products = [
     price: 499.9,
     category: 'Áudio',
     stock: 30,
-    image: 'https://picsum.photos/seed/headphone/600/400',
+    image: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=600&q=80',
   },
   {
     id: 4,
@@ -33,7 +33,7 @@ export const products = [
     price: 899.0,
     category: 'Eletrônicos',
     stock: 20,
-    image: 'https://picsum.photos/seed/smartwatch/600/400',
+    image: 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=600&q=80',
   },
   {
     id: 5,
@@ -42,7 +42,7 @@ export const products = [
     price: 1299.9,
     category: 'Móveis',
     stock: 12,
-    image: 'https://picsum.photos/seed/chair/600/400',
+    image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Gaming%20chair%201.jpg?width=600',
   },
   {
     id: 6,
@@ -51,7 +51,7 @@ export const products = [
     price: 349.9,
     category: 'Periféricos',
     stock: 25,
-    image: 'https://picsum.photos/seed/keyboard/600/400',
+    image: 'https://images.unsplash.com/photo-1618384887929-16ec33fab9ef?auto=format&fit=crop&w=600&q=80',
   },
   {
     id: 7,
@@ -60,7 +60,7 @@ export const products = [
     price: 199.9,
     category: 'Periféricos',
     stock: 40,
-    image: 'https://picsum.photos/seed/mouse/600/400',
+    image: 'https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?auto=format&fit=crop&w=600&q=80',
   },
   {
     id: 8,
@@ -69,7 +69,7 @@ export const products = [
     price: 2799.0,
     category: 'Eletrônicos',
     stock: 6,
-    image: 'https://picsum.photos/seed/monitor/600/400',
+    image: 'https://images.unsplash.com/photo-1614624532983-4ce03382d63d?auto=format&fit=crop&w=600&q=80',
   },
   {
     id: 9,
@@ -78,7 +78,7 @@ export const products = [
     price: 749.9,
     category: 'Casa',
     stock: 18,
-    image: 'https://picsum.photos/seed/coffee/600/400',
+    image: 'https://images.unsplash.com/photo-1608354580875-30bd4168b351?auto=format&fit=crop&w=600&q=80',
   },
   {
     id: 10,
@@ -87,7 +87,7 @@ export const products = [
     price: 229.9,
     category: 'Acessórios',
     stock: 35,
-    image: 'https://picsum.photos/seed/backpack/600/400',
+    image: 'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=600&q=80',
   },
   {
     id: 11,
@@ -96,7 +96,7 @@ export const products = [
     price: 399.9,
     category: 'Áudio',
     stock: 22,
-    image: 'https://picsum.photos/seed/speaker/600/400',
+    image: 'https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?auto=format&fit=crop&w=600&q=80',
   },
   {
     id: 12,
@@ -105,6 +105,6 @@ export const products = [
     price: 299.9,
     category: 'Periféricos',
     stock: 28,
-    image: 'https://picsum.photos/seed/webcam/600/400',
+    image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Webcam%20(Logitech%20c922).jpg?width=600',
   },
 ];

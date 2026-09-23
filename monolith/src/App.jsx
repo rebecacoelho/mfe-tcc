@@ -17,6 +17,10 @@ export default function App() {
             <Route path="/cart" element={<CartPage />} />
           </Routes>
         </main>
+        <footer className="footer">
+          <strong>Shoply</strong> — sua loja de tecnologia · Projeto comparativo
+          monólito x microfrontends (TCC)
+        </footer>
       </CartProvider>
     </BrowserRouter>
   );

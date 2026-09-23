@@ -37,6 +37,10 @@ export default function ProductPage() {
         <h1>{product.name}</h1>
         <p>{product.description}</p>
         <p className="card-price big">{formatPrice(product.price)}</p>
+        <p className="card-installments">
+          em até 10x de {formatPrice(product.price / 10)} sem juros
+        </p>
+        {product.price >= 199 && <p className="card-freeship">Frete grátis</p>}
         <p className="stock">{product.stock} em estoque</p>
         <button className="btn btn-primary" onClick={handleAdd}>
           {added ? '✓ Adicionado!' : 'Adicionar ao carrinho'}
