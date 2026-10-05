@@ -1,20 +1,20 @@
 # Métricas em ambiente real (produção)
 
-_Gerado em 2026-10-01T22:34:09.413Z — mediana de 3 execuções_
+_Gerado em 2026-10-05T17:54:20.845Z — mediana de 3 execuções_
 
 - Monólito: https://monolith-two-delta.vercel.app
 - Microfrontends: https://shell-gamma-six.vercel.app
 
 | Métrica | Monólito | Microfrontends |
 |---|---:|---:|
-| performanceScore | 63 | 54 |
-| first-contentful-paint | 1078 ms | 1484 ms |
-| largest-contentful-paint | 2133 ms | 2951 ms |
+| performanceScore | 86 | 62 |
+| first-contentful-paint | 1085 ms | 1159 ms |
+| largest-contentful-paint | 2214 ms | 2922 ms |
 | total-blocking-time | 0 ms | 0 ms |
-| cumulative-layout-shift | 0.81 | 0.81 |
-| speed-index | 1078 ms | 1484 ms |
-| interactive | 2133 ms | 2951 ms |
-| total-byte-weight | 628.5 KB | 660.7 KB |
+| cumulative-layout-shift | 0 | 0.39 |
+| speed-index | 1085 ms | 1159 ms |
+| interactive | 2214 ms | 2922 ms |
+| total-byte-weight | 628.7 KB | 660.9 KB |
 
 ## Notas
 
