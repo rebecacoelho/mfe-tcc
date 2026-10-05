@@ -22,7 +22,17 @@ export default function ProductDetail() {
       .finally(() => setLoading(false));
   }, [id]);
 
-  if (loading) return <p className="state-msg">Carregando…</p>;
+  if (loading)
+    return (
+      <div className="product-detail" aria-busy="true">
+        <div style={{ aspectRatio: '4 / 3', background: 'var(--border)', borderRadius: 8, minHeight: 320 }} />
+        <div>
+          <p className="state-msg" style={{ minHeight: 200 }}>
+            Carregando…
+          </p>
+        </div>
+      </div>
+    );
   if (error) return <p className="state-msg error">{error}</p>;
 
   const handleAdd = () => {
@@ -33,7 +43,15 @@ export default function ProductDetail() {
 
   return (
     <div className="product-detail">
-      <img src={product.image} alt={product.name} />
+      <img
+        src={product.image}
+        alt={product.name}
+        width="600"
+        height="400"
+        decoding="async"
+        fetchpriority="high"
+        style={{ background: 'var(--border)' }}
+      />
       <div>
         <span className="card-category">{product.category}</span>
         <h1>{product.name}</h1>

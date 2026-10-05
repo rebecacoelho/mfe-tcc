@@ -15,7 +15,38 @@ export default function HomePage() {
       .finally(() => setLoading(false));
   }, []);
 
-  if (loading) return <p className="state-msg">Carregando produtos…</p>;
+  if (loading)
+    return (
+      <>
+        <section className="hero">
+          <h1>Ofertas da semana em tecnologia</h1>
+          <p>
+            Eletrônicos, periféricos e acessórios com os melhores preços e frete
+            grátis para todo o Brasil.
+          </p>
+        </section>
+        <div className="features">
+          <div className="feature">
+            <strong>Frete grátis</strong>
+            em compras acima de R$ 199
+          </div>
+          <div className="feature">
+            <strong>Compra segura</strong>
+            seus dados protegidos
+          </div>
+          <div className="feature">
+            <strong>Troca fácil</strong>
+            devolução grátis em 7 dias
+          </div>
+        </div>
+        <h1 className="section-title">Produtos em destaque</h1>
+        <div className="grid" style={{ minHeight: 600 }}>
+          <p className="state-msg" style={{ gridColumn: '1 / -1' }}>
+            Carregando produtos…
+          </p>
+        </div>
+      </>
+    );
   if (error)
     return (
       <p className="state-msg error">

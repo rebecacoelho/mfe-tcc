@@ -5,7 +5,15 @@ export default function ProductCard({ product }) {
   return (
     <div className="card">
       <Link to={`/product/${product.id}`}>
-        <img src={product.image} alt={product.name} loading="lazy" />
+        <img
+          src={product.image}
+          alt={product.name}
+          loading="lazy"
+          decoding="async"
+          width="600"
+          height="400"
+          style={{ background: 'var(--border)' }}
+        />
       </Link>
       <div className="card-body">
         <span className="card-category">{product.category}</span>
